@@ -10,7 +10,7 @@ filelock==3.6.0
 fonttools==4.31.2
 google-auth==2.6.2
 google-auth-oauthlib==0.4.6
-grpcio==1.44.0
+grpcio==1.53.2
 huggingface-hub==0.4.0
 idna==3.3
 importlib-metadata==4.11.3
