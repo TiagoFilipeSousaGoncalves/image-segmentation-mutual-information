@@ -1,0 +1,7 @@
+@inproceedings{goncalvescapozzi2024recpad,
+	author = {Tiago Gonçalves, Leonardo Capozzi, Ana Rebelo and Jaime S. Cardoso},
+	title = {{Deep Image Segmentation based on Mutual Information: A Study}},
+	booktitle = {{30th Portuguese Conference in Pattern Recognition (RECPAD)}},
+	year = {2024},
+	address = {{Covilhã, Portugal}}
+}

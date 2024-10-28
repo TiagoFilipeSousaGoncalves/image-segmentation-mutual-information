@@ -33,8 +33,8 @@ for dataset in datasets:
     if dataset == 'cityscapes':
 
         test_dataset = CityScapesDataset(
-            img_root='/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/data/CITYSCAPES/leftImg8bit',
-            seg_root='/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/data/CITYSCAPES/gtFine',
+            img_root='data/CITYSCAPES/leftImg8bit',
+            seg_root='data/CITYSCAPES/gtFine',
             mode='val',
             extensions=['.png'],
             transform=transforms.Compose([Resize(234), RandomCrop((224, 224)), ToTensor()])
@@ -45,9 +45,9 @@ for dataset in datasets:
     elif dataset == 'VOC':
 
         test_dataset = VOCDataset(
-            img_root='/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/data/PASCALVOC2012/VOCdevkit/VOC2012/JPEGImages',
-            seg_root='/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/data/PASCALVOC2012/VOCdevkit/VOC2012/SegmentationClass',
-            filenames_path='/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/data/PASCALVOC2012/VOCdevkit/VOC2012/ImageSets/Segmentation/val.txt',
+            img_root='data/PASCALVOC2012/VOCdevkit/VOC2012/JPEGImages',
+            seg_root='data/PASCALVOC2012/VOCdevkit/VOC2012/SegmentationClass',
+            filenames_path='data/PASCALVOC2012/VOCdevkit/VOC2012/ImageSets/Segmentation/val.txt',
             extensions=['.jpg', '.png'],
             transform=transforms.Compose([Resize(234), RandomCrop((224, 224)), ToTensor()])
         )
@@ -57,8 +57,8 @@ for dataset in datasets:
     elif dataset == 'ADE20k':
 
         test_dataset = ADE20k(
-            img_root='/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/data/ADE20K/ADEChallengeData2016/images',
-            seg_root='/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/data/ADE20K/ADEChallengeData2016/annotations',
+            img_root='data/ADE20K/ADEChallengeData2016/images',
+            seg_root='data/ADE20K/ADEChallengeData2016/annotations',
             mode='val',
             extensions=['.jpg', '.png'],
             transform=transforms.Compose([Resize(234), RandomCrop((224, 224)),ToTensor()])
@@ -74,7 +74,7 @@ for dataset in datasets:
 
     # Model
     model = UNet(in_channels=3, out_channels=test_dataset.num_classes)
-    model.load_state_dict(torch.load(f'/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/results/baseline/weights/unet_model_{dataset.lower()}.pth', map_location='cpu'))
+    model.load_state_dict(torch.load(f'results/baseline/weights/unet_model_{dataset.lower()}.pth', map_location='cpu'))
     model.to(device)
 
 
@@ -83,7 +83,7 @@ for dataset in datasets:
 
 
     # Create path to save figures
-    figure_path = os.path.join('/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/results/baseline/', 'figures', dataset.lower())
+    figure_path = os.path.join('results/baseline/', 'figures', dataset.lower())
     if os.path.isdir(figure_path)==False:
         os.makedirs(figure_path)
 

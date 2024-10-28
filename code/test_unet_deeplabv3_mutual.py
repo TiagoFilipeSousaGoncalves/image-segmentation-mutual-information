@@ -21,8 +21,7 @@ device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 
 # Datasets
-# datasets = ['cityscapes', 'VOC', 'ADE20k']
-datasets = ['cityscapes', 'VOC']
+datasets = ['cityscapes', 'VOC', 'ADE20k']
 
 
 
@@ -34,8 +33,8 @@ for dataset in datasets:
     if dataset == 'cityscapes':
 
         test_dataset = CityScapesDataset(
-            img_root='/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/data/CITYSCAPES/leftImg8bit',
-            seg_root='/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/data/CITYSCAPES/gtFine',
+            img_root='data/CITYSCAPES/leftImg8bit',
+            seg_root='data/CITYSCAPES/gtFine',
             mode='val',
             extensions=['.png'],
             transform=transforms.Compose([Resize(234), RandomCrop((224, 224)), ToTensor()])
@@ -46,9 +45,9 @@ for dataset in datasets:
     elif dataset == 'VOC':
 
         test_dataset = VOCDataset(
-            img_root='/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/data/PASCALVOC2012/VOCdevkit/VOC2012/JPEGImages',
-            seg_root='/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/data/PASCALVOC2012/VOCdevkit/VOC2012/SegmentationClass',
-            filenames_path='/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/data/PASCALVOC2012/VOCdevkit/VOC2012/ImageSets/Segmentation/val.txt',
+            img_root='data/PASCALVOC2012/VOCdevkit/VOC2012/JPEGImages',
+            seg_root='data/PASCALVOC2012/VOCdevkit/VOC2012/SegmentationClass',
+            filenames_path='data/PASCALVOC2012/VOCdevkit/VOC2012/ImageSets/Segmentation/val.txt',
             extensions=['.jpg', '.png'],
             transform=transforms.Compose([Resize(234), RandomCrop((224, 224)), ToTensor()])
         )
@@ -58,8 +57,8 @@ for dataset in datasets:
     elif dataset == 'ADE20k':
 
         test_dataset = ADE20k(
-            img_root='/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/data/ADE20K/ADEChallengeData2016/images',
-            seg_root='/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/data/ADE20K/ADEChallengeData2016/annotations',
+            img_root='data/ADE20K/ADEChallengeData2016/images',
+            seg_root='data/ADE20K/ADEChallengeData2016/annotations',
             mode='val',
             extensions=['.jpg', '.png'],
             transform=transforms.Compose([Resize(234), RandomCrop((224, 224)),ToTensor()])
@@ -78,7 +77,7 @@ for dataset in datasets:
     
 
     # Deep Mutual Learning Path
-    model.load_state_dict(torch.load(f'/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/results/mutual_learning/weights/student_unet_model_{dataset.lower()}.pt', map_location='cpu'))
+    model.load_state_dict(torch.load(f'results/mutual_learning/weights/student_unet_model_{dataset.lower()}.pt', map_location='cpu'))
 
     model.to(device)
 

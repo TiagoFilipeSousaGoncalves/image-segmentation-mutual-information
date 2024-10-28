@@ -21,8 +21,7 @@ device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 
 # Datasets
-# datasets = ['cityscapes', 'VOC', 'ADE20k']
-datasets = ['cityscapes']
+datasets = ['cityscapes', 'VOC', 'ADE20k']
 
 
 # Loop through datasets
@@ -33,8 +32,8 @@ for dataset in datasets:
     if dataset == 'cityscapes':
 
         train_dataset = CityScapesDataset(
-            img_root='/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/data/CITYSCAPES/leftImg8bit',
-            seg_root='/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/data/CITYSCAPES/gtFine',
+            img_root='data/CITYSCAPES/leftImg8bit',
+            seg_root='data/CITYSCAPES/gtFine',
             mode='train',
             extensions=['.png'],
             transform=transforms.Compose([Resize(234), RandomCrop((224, 224)), ToTensor()])
@@ -45,9 +44,9 @@ for dataset in datasets:
     elif dataset == 'VOC':
 
         train_dataset = VOCDataset(
-            img_root='/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/data/PASCALVOC2012/VOCdevkit/VOC2012/JPEGImages',
-            seg_root='/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/data/PASCALVOC2012/VOCdevkit/VOC2012/SegmentationClass',
-            filenames_path='/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/data/PASCALVOC2012/VOCdevkit/VOC2012/ImageSets/Segmentation/train.txt',
+            img_root='data/PASCALVOC2012/VOCdevkit/VOC2012/JPEGImages',
+            seg_root='data/PASCALVOC2012/VOCdevkit/VOC2012/SegmentationClass',
+            filenames_path='data/PASCALVOC2012/VOCdevkit/VOC2012/ImageSets/Segmentation/train.txt',
             extensions=['.jpg', '.png'],
             transform=transforms.Compose([Resize(234), RandomCrop((224, 224)), ToTensor()])
         )
@@ -57,8 +56,8 @@ for dataset in datasets:
     elif dataset == 'ADE20k':
 
         train_dataset = ADE20k(
-            img_root='/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/data/ADE20K/ADEChallengeData2016/images',
-            seg_root='/ctm-hdd-pool01/tgoncalv/image-segmentation-mutual-information/data/ADE20K/ADEChallengeData2016/annotations',
+            img_root='data/ADE20K/ADEChallengeData2016/images',
+            seg_root='data/ADE20K/ADEChallengeData2016/annotations',
             mode='train',
             extensions=['.jpg', '.png'],
             transform=transforms.Compose([Resize(234), RandomCrop((224, 224)),ToTensor()])
